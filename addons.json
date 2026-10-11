@@ -1,0 +1,18 @@
+{
+  "_not": "CurseForge proje adresindeki son kisim (slug). Yeni addon yayina cikinca buraya ekle.",
+  "addons": [
+    "fallencombattext-wow-forever",
+    "fallenbags",
+    "fallenlootroll",
+    "wow-lootfeed",
+    "fallenitempreview",
+    "fallendungeonmap",
+    "fallenquesttracker",
+    "fallennameplates",
+    "fallenbuffcheck",
+    "fallenwhisper",
+    "wow-xp-bar-forever-anniversary",
+    "character-memoir-karakter-anilari",
+    "macroflow-side-bar-massive-macro-automation"
+  ]
+}

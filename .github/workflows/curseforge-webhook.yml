@@ -1,0 +1,35 @@
+name: CurseForge -> Discord
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # 30 dakikada bir
+  workflow_dispatch:          # Actions sekmesinden elle de calistirilabilir
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cf-webhook
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Guncellemeleri kontrol et
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          DISCORD_ROLE_ID: ${{ vars.DISCORD_ROLE_ID }}
+        run: python check.py
+      - name: Durumu kaydet
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add state.json || true
+          git diff --cached --quiet || git commit -m "Son surumler guncellendi"
+          git push
