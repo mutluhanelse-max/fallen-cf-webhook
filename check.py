@@ -62,7 +62,7 @@ def get_project_api(slug, key):
     }
 
 
-def get_project(slug):
+def get_project(slug, pid=None):
     key = os.environ.get("CF_API_KEY")
     if key:
         try:
@@ -77,7 +77,7 @@ def get_project(slug):
     # cfwidget ilk istekte projeyi siraya alip 202 donebilir; birkac kez dene
     for _ in range(3):
         try:
-            data = http_json(f"https://api.cfwidget.com/wow/addons/{slug}")
+            data = http_json(f"https://api.cfwidget.com/{pid}" if pid else f"https://api.cfwidget.com/wow/addons/{slug}")
             if data and data.get("files"):
                 REPORT[slug] = REPORT.get(slug, "") + " | cfwidget: ok"
                 return data
@@ -153,9 +153,10 @@ def main():
         print("CF_API_KEY bulundu: resmi CurseForge API kullaniliyor")
     changed = False
 
-    for slug in addons:
+    for entry in addons:
+        slug, pid = (entry["slug"], entry.get("id")) if isinstance(entry, dict) else (entry, None)
         print(f"- {slug}")
-        project = get_project(slug)
+        project = get_project(slug, pid)
         if not project:
             print("  proje okunamadi, atlandi")
             continue

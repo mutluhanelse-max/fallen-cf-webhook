@@ -1,18 +1,39 @@
 {
-  "_not": "CurseForge proje adresindeki son kisim (slug). Yeni addon yayina cikinca buraya ekle.",
+  "_not": "CurseForge adresinin son kismi (slug). cfwidget adresle bulamazsa proje sayfasindaki 'Project ID' de eklenir: {\"slug\": \"...\", \"id\": 123}",
   "addons": [
     "fallencombattext-wow-forever",
     "fallenbags",
-    "fallenlootroll",
-    "wow-lootfeed",
+    {
+      "slug": "fallenlootroll",
+      "id": 1721114
+    },
+    {
+      "slug": "wow-lootfeed",
+      "id": 1710981
+    },
     "fallenitempreview",
     "fallendungeonmap",
-    "fallenquesttracker",
+    {
+      "slug": "fallenquesttracker",
+      "id": 1715107
+    },
     "fallennameplates",
     "fallenbuffcheck",
-    "fallenwhisper",
-    "wow-xp-bar-forever-anniversary",
-    "character-memoir-karakter-anilari",
-    "macroflow-side-bar-massive-macro-automation"
+    {
+      "slug": "fallenwhisper",
+      "id": 1722438
+    },
+    {
+      "slug": "wow-xp-bar-forever-anniversary",
+      "id": 1710328
+    },
+    {
+      "slug": "character-memoir-karakter-anilari",
+      "id": 1720652
+    },
+    {
+      "slug": "macroflow-side-bar-massive-macro-automation",
+      "id": 1716449
+    }
   ]
 }
