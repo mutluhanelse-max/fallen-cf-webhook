@@ -32,7 +32,44 @@ def http_json(url, headers=None, data=None, method=None):
         return json.loads(body) if body else None
 
 
+def get_project_api(slug, key):
+    """Resmi CurseForge API (gameId 1 = World of Warcraft)."""
+    data = http_json(
+        f"https://api.curseforge.com/v1/mods/search?gameId=1&slug={slug}",
+        headers={"x-api-key": key, "Accept": "application/json"})
+    mods = [m for m in (data or {}).get("data", []) if m.get("slug") == slug]
+    if not mods:
+        return None
+    m = mods[0]
+    files = []
+    for f in m.get("latestFiles") or []:
+        files.append({
+            "id": f["id"],
+            "display": f.get("displayName") or f.get("fileName"),
+            "name": f.get("fileName"),
+            "url": f"{(m.get('links') or {}).get('websiteUrl', '')}/files/{f['id']}",
+            "type": {1: "release", 2: "beta", 3: "alpha"}.get(f.get("releaseType"), "release"),
+            "versions": f.get("gameVersions") or [],
+            "uploaded_at": f.get("fileDate"),
+        })
+    return {
+        "id": m["id"],
+        "title": m.get("name"),
+        "urls": {"curseforge": (m.get("links") or {}).get("websiteUrl")},
+        "thumbnail": (m.get("logo") or {}).get("thumbnailUrl"),
+        "files": files,
+    }
+
+
 def get_project(slug):
+    key = os.environ.get("CF_API_KEY")
+    if key:
+        try:
+            p = get_project_api(slug, key)
+            if p and p["files"]:
+                return p
+        except Exception as e:
+            print(f"  CurseForge API hatasi ({e}); cfwidget deneniyor")
     # cfwidget ilk istekte projeyi siraya alip 202 donebilir; birkac kez dene
     for _ in range(3):
         try:
@@ -106,6 +143,8 @@ def main():
     addons = json.load(open(ADDONS_PATH, encoding="utf-8"))["addons"]
     state = json.load(open(STATE_PATH, encoding="utf-8")) if os.path.exists(STATE_PATH) else {}
     first_run = not state
+    if os.environ.get("CF_API_KEY"):
+        print("CF_API_KEY bulundu: resmi CurseForge API kullaniliyor")
     changed = False
 
     for slug in addons:
