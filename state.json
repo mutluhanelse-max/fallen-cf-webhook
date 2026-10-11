@@ -1,8 +1,15 @@
 {
+  "character-memoir-karakter-anilari": 9056009,
   "fallenbags": 9121819,
   "fallenbuffcheck": 9081816,
   "fallencombattext-wow-forever": 9128217,
   "fallendungeonmap": 9056449,
   "fallenitempreview": 9132479,
-  "fallennameplates": 9089171
+  "fallenlootroll": 9068758,
+  "fallennameplates": 9089171,
+  "fallenquesttracker": 9129264,
+  "fallenwhisper": 9128657,
+  "macroflow-side-bar-massive-macro-automation": 9055774,
+  "wow-lootfeed": 9126528,
+  "wow-xp-bar-forever-anniversary": 9083179
 }

@@ -3,17 +3,17 @@
   "sonuc": {
     "fallencombattext-wow-forever": "api hatasi: HTTPError 403 | cfwidget: ok",
     "fallenbags": "api hatasi: HTTPError 403 | cfwidget: ok",
-    "fallenlootroll": "api hatasi: HTTPError 403 | cfwidget: 404 | cfwidget: 404 | cfwidget: 404",
-    "wow-lootfeed": "api hatasi: HTTPError 403 | cfwidget: 404 | cfwidget: 404 | cfwidget: 404",
+    "fallenlootroll": "api hatasi: HTTPError 403 | cfwidget: ok",
+    "wow-lootfeed": "api hatasi: HTTPError 403 | cfwidget: ok",
     "fallenitempreview": "api hatasi: HTTPError 403 | cfwidget: ok",
     "fallendungeonmap": "api hatasi: HTTPError 403 | cfwidget: ok",
-    "fallenquesttracker": "api hatasi: HTTPError 403 | cfwidget: 404 | cfwidget: 404 | cfwidget: 404",
+    "fallenquesttracker": "api hatasi: HTTPError 403 | cfwidget: ok",
     "fallennameplates": "api hatasi: HTTPError 403 | cfwidget: ok",
     "fallenbuffcheck": "api hatasi: HTTPError 403 | cfwidget: ok",
-    "fallenwhisper": "api hatasi: HTTPError 403 | cfwidget: 404 | cfwidget: 404 | cfwidget: 404",
-    "wow-xp-bar-forever-anniversary": "api hatasi: HTTPError 403 | cfwidget: 404 | cfwidget: 404 | cfwidget: 404",
-    "character-memoir-karakter-anilari": "api hatasi: HTTPError 403 | cfwidget: 404 | cfwidget: 404 | cfwidget: 404",
-    "macroflow-side-bar-massive-macro-automation": "api hatasi: HTTPError 403 | cfwidget: 404 | cfwidget: 404 | cfwidget: 404"
+    "fallenwhisper": "api hatasi: HTTPError 403 | cfwidget: ok",
+    "wow-xp-bar-forever-anniversary": "api hatasi: HTTPError 403 | cfwidget: ok",
+    "character-memoir-karakter-anilari": "api hatasi: HTTPError 403 | cfwidget: ok",
+    "macroflow-side-bar-massive-macro-automation": "api hatasi: HTTPError 403 | cfwidget: ok"
   },
-  "zaman": "2026-10-11 19:46 UTC"
+  "zaman": "2026-10-11 19:47 UTC"
 }
