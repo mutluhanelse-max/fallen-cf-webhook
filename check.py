@@ -22,6 +22,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 STATE_PATH = os.path.join(ROOT, "state.json")
 ADDONS_PATH = os.path.join(ROOT, "addons.json")
 UA = {"User-Agent": "FallenSkullCorp-CF-Webhook/1.0"}
+REPORT = {}
 
 
 def http_json(url, headers=None, data=None, method=None):
@@ -67,16 +68,21 @@ def get_project(slug):
         try:
             p = get_project_api(slug, key)
             if p and p["files"]:
+                REPORT[slug] = "api: ok"
                 return p
+            REPORT[slug] = "api: proje bulunamadi"
         except Exception as e:
+            REPORT[slug] = f"api hatasi: {type(e).__name__} {getattr(e, 'code', '')}"
             print(f"  CurseForge API hatasi ({e}); cfwidget deneniyor")
     # cfwidget ilk istekte projeyi siraya alip 202 donebilir; birkac kez dene
     for _ in range(3):
         try:
             data = http_json(f"https://api.cfwidget.com/wow/addons/{slug}")
             if data and data.get("files"):
+                REPORT[slug] = REPORT.get(slug, "") + " | cfwidget: ok"
                 return data
         except urllib.error.HTTPError as e:
+            REPORT[slug] = REPORT.get(slug, "") + f" | cfwidget: {e.code}"
             if e.code not in (202, 404, 429, 500, 502, 503):
                 raise
         time.sleep(5)
@@ -167,6 +173,11 @@ def main():
             time.sleep(2)
         state[slug] = f["id"]
         changed = True
+
+    with open(os.path.join(ROOT, "last_run.json"), "w", encoding="utf-8") as fh:
+        json.dump({"api_key": bool(os.environ.get("CF_API_KEY")), "sonuc": REPORT,
+                   "zaman": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())},
+                  fh, indent=2, ensure_ascii=False)
 
     if changed:
         with open(STATE_PATH, "w", encoding="utf-8") as fh:
